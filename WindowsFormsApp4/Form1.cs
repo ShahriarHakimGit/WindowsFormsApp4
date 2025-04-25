@@ -140,5 +140,60 @@ namespace WindowsFormsApp4
             posn = custTable.Rows.Count - 1;
             PopulateFields();
         }
+
+        private void ClearTextBox()
+        {
+            txtCustomerID.Text = "";
+            txtCustomerName.Text = "";
+            txtPhoneNumber.Text = "";
+            txtEmailAddress.Text = "";
+        }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            CopyUIValuesToDS(); //custom method
+            da.Update(ds, "CustomersCopy");
+            MessageBox.Show("New Row Added");
+        }
+        private void CopyUIValuesToDS()
+        {
+            custTable.Rows[posn]["CustomerID"] = txtCustomerID.Text;
+            custTable.Rows[posn]["CustomerName"] = txtCustomerName.Text;
+            custTable.Rows[posn]["PhoneNumber"] = txtPhoneNumber.Text;
+            custTable.Rows[posn]["EmailAddress"] = txtEmailAddress.Text;
+
+            // just set it to A for now because 
+            //membercatagory cannot be left blank
+
+        }
+
+        private void findButton_Click(object sender, EventArgs e)
+        {
+            int rowCount = custTable.Rows.Count;
+            Boolean isFound = false;
+
+            for(int i = 0; i < rowCount; i++) 
+            {
+                if (custTable.Rows[i]["CustomerID"].ToString().Equals(txtCustomerID.Text))
+                {
+                    posn = i;
+                    isFound = true;
+                    break;
+                }
+            }
+
+            if (isFound)
+            {
+                PopulateFields();
+            }
+            else
+            {
+                MessageBox.Show("Not Found");
+                ClearTextBox();
+                posn = -1;
+            }
+        }
+
+
     }
 }

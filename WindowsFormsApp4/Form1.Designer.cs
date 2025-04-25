@@ -170,6 +170,7 @@
             this.updateButton.TabIndex = 13;
             this.updateButton.Text = "Update";
             this.updateButton.UseVisualStyleBackColor = true;
+            this.updateButton.Click += new System.EventHandler(this.updateButton_Click);
             // 
             // findButton
             // 
@@ -179,6 +180,7 @@
             this.findButton.TabIndex = 14;
             this.findButton.Text = "Find";
             this.findButton.UseVisualStyleBackColor = true;
+            this.findButton.Click += new System.EventHandler(this.findButton_Click);
             // 
             // deleteButton
             // 
